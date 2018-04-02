@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.0.10deb1
+- http://www.phpmyadmin.net
+-
+- Host: localhost
+- Generation Time: Apr 02, 2018 at 01:03 PM
+- Server version: 5.5.59-0ubuntu0.14.04.1
+- PHP Version: 5.6.34-1+ubuntu14.04.1+deb.sury.org+1
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="http://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="webtoon_hub" collation="latin1_swedish_ci" charset="latin1">
+            <pma:table name="products">
+                CREATE TABLE `products` (
+                  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+                  `title` varchar(128) NOT NULL,
+                  `link` varchar(256) NOT NULL,
+                  `product_type_id` int(3) unsigned NOT NULL,
+                  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                  `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+                  PRIMARY KEY (`id`),
+                  KEY `product_type_id` (`product_type_id`),
+                  CONSTRAINT `products_ibfk_1` FOREIGN KEY (`product_type_id`) REFERENCES `product_type` (`id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="product_type">
+                CREATE TABLE `product_type` (
+                  `id` int(3) unsigned NOT NULL AUTO_INCREMENT,
+                  `name` varchar(128) NOT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="roles">
+                CREATE TABLE `roles` (
+                  `id` int(3) unsigned NOT NULL AUTO_INCREMENT,
+                  `name` varchar(128) NOT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="users">
+                CREATE TABLE `users` (
+                  `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
+                  `discord_id` varchar(24) NOT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="user_roles">
+                CREATE TABLE `user_roles` (
+                  `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
+                  `user_id` int(6) unsigned NOT NULL,
+                  `role_id` int(3) unsigned NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `user_id` (`user_id`),
+                  KEY `role_id` (`role_id`),
+                  CONSTRAINT `user_roles_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+                  CONSTRAINT `user_roles_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Database: 'webtoon_hub'
+    -->
+    <database name="webtoon_hub">
+        <!-- Table products -->
+        <!-- Table product_type -->
+        <table name="product_type">
+            <column name="id">1</column>
+            <column name="name">Art</column>
+        </table>
+        <table name="product_type">
+            <column name="id">2</column>
+            <column name="name">Comic</column>
+        </table>
+        <table name="product_type">
+            <column name="id">3</column>
+            <column name="name">Poet</column>
+        </table>
+        <table name="product_type">
+            <column name="id">4</column>
+            <column name="name">Story</column>
+        </table>
+        <!-- Table roles -->
+        <table name="roles">
+            <column name="id">1</column>
+            <column name="name">Artist</column>
+        </table>
+        <table name="roles">
+            <column name="id">2</column>
+            <column name="name">Comic</column>
+        </table>
+        <table name="roles">
+            <column name="id">3</column>
+            <column name="name">Writer</column>
+        </table>
+        <!-- Table users -->
+        <!-- Table user_roles -->
+    </database>
+</pma_xml_export>
