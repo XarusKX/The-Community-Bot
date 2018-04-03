@@ -1,13 +1,13 @@
 const Discord = require("discord.js");
 const Client = new Discord.Client();
+const Database = require("./database/database.js");
 const fs = require("fs");
-Client.config = require("./config.js");
-
-// const Database = require("./Database/database.js");
-// const Conn = Database.Database;
-
 const Enmap = require("enmap");
 const EnmapLevel = require("enmap-level");
+Client.config = require("./config.js");
+Client.db1 = Database.Database;
+
+
 
 Client.commands = new Enmap();
 Client.aliases = new Enmap();
@@ -35,21 +35,6 @@ fs.readdir('./events/', (err, files) => {
     Client.on(eventName, event.bind(null, Client));
     delete require.cache[require.resolve(`./events/${file}`)];
   });
-});
-
-Client.on("ready", () => {
-  console.log(`${Client.config.cliColor("NC")}I am ready!`);
-  // Conn.Db.authenticate()
-  //   .then(() => {
-  //     console.log("Connection has been established!");
-  //   })
-  //   .catch(err => {
-  //     console.error("Unable to connect!");
-  //   })
-});
-
-Client.on("message", message => {
-  if (message.author.bot) return;
 });
 
 Client.login(Client.config.discordToken);
