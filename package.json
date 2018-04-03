@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com"
@@ -19,5 +22,12 @@
     "webtoon"
   ],
   "author": "Anthony Ricardo Thiotanry",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "enmap": "^2.0.4",
+    "enmap-level": "^2.0.2",
+    "mysql": "^2.15.0",
+    "sequelize": "^4.37.5"
+  }
 }
