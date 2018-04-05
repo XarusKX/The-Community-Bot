@@ -5,7 +5,7 @@
 - http://www.phpmyadmin.net
 -
 - Host: localhost
-- Generation Time: Apr 02, 2018 at 01:03 PM
+- Generation Time: Apr 05, 2018 at 05:03 PM
 - Server version: 5.5.59-0ubuntu0.14.04.1
 - PHP Version: 5.6.34-1+ubuntu14.04.1+deb.sury.org+1
 -->
@@ -48,7 +48,7 @@
                   `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
                   `discord_id` varchar(24) NOT NULL,
                   PRIMARY KEY (`id`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="user_roles">
                 CREATE TABLE `user_roles` (
@@ -60,6 +60,21 @@
                   KEY `role_id` (`role_id`),
                   CONSTRAINT `user_roles_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
                   CONSTRAINT `user_roles_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="webtoons">
+                CREATE TABLE `webtoons` (
+                  `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
+                  `title` varchar(256) NOT NULL,
+                  `author` varchar(256) NOT NULL,
+                  `genre` varchar(48) DEFAULT NULL,
+                  `image` varchar(256) DEFAULT NULL,
+                  `link` varchar(256) DEFAULT NULL,
+                  `likes` int(11) unsigned DEFAULT NULL,
+                  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                  `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+                  PRIMARY KEY (`id`),
+                  UNIQUE KEY `title` (`title`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
             </pma:table>
         </pma:database>
@@ -102,5 +117,6 @@
         </table>
         <!-- Table users -->
         <!-- Table user_roles -->
+        <!-- Table webtoons -->
     </database>
 </pma_xml_export>
