@@ -93,7 +93,8 @@ class Database {
       },
       title: {
         type: Sequelize.STRING(256),
-        allowNull: false
+        allowNull: false,
+        unique: true
       },
       author: {
         type: Sequelize.STRING(256),
