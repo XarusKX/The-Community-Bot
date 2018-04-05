@@ -13,5 +13,5 @@ exports.conf = {
 exports.help = {
   name: "ping",
   description: "Ping bot latency and API latency.",
-  usage: "ping"
+  usage: "Ping"
 };
