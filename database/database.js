@@ -4,7 +4,7 @@ const Config = require("../config.js");
 class Database {
   constructor() {
     this.Db = new Sequelize(Config.db[0].name, Config.db[0].user, Config.db[0].password, {
-      host: "localhost",
+      host:Config.db[0].host,
       dialect: "mysql",
       operatorAliases: false,
     });
@@ -85,7 +85,39 @@ class Database {
       },
     })
 
+    this.Webtoon = this.Db.define("webtoons", {
+      id: {
+        type: Sequelize.INTEGER(6).UNSIGNED,
+        allowNull: false,
+        primaryKey: true
+      },
+      title: {
+        type: Sequelize.STRING(256),
+        allowNull: false
+      },
+      author: {
+        type: Sequelize.STRING(256),
+        allowNull: false
+      },
+      genre: {
+        type: Sequelize.STRING(48),
+        allowNull: true
+      },
+      image: {
+        type: Sequelize.STRING(256),
+        allowNull: true
+      },
+      link: {
+        type: Sequelize.STRING(256),
+        allowNull: true
+      },
+      likes: {
+        type: Sequelize.INTEGER(11).UNSIGNED,
+        allowNull: false
+      },
+    })
+
   }
 }
 
-module.exports.Database = new Database();
+module.exports.db1 = new Database();
