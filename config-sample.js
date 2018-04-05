@@ -25,15 +25,17 @@ const cliColor = (color) => {
 const databaseNames = ["DATABASE_NAME"];
 const databaseUsers = ["DATABASE_USERNAME"];
 const databasePasswords = ["DATABASE_PASSWORD"];
-var databaseObj = function(name, user, password){
+const databaseHosts = ["DATABASE_HOST"];
+var databaseObj = function(name, user, password, host){
   this.name = name;
   this.user = user;
   this.password = password;
+  this.host = host;
 }
 var db = [];
 for(let i = 0; i < databaseNames.length; i++)
 {
-  db.push(new databaseObj(databaseNames[i], databaseUsers[i], databasePasswords[i]));
+  db.push(new databaseObj(databaseNames[i], databaseUsers[i], databasePasswords[i], databaseHosts[i]));
 }
 
 module.exports.discordToken = discordToken;
