@@ -14,6 +14,7 @@ class Database {
         type: Sequelize.INTEGER(6).UNSIGNED,
         allowNull: false,
         primaryKey: true,
+        autoIncrement: true
       },
       discord_id: {
         type: Sequelize.STRING(24),
@@ -69,7 +70,8 @@ class Database {
       id: {
         type: Sequelize.INTEGER(12).UNSIGNED,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
       },
       title: {
         type: Sequelize.STRING(128),
@@ -77,6 +79,10 @@ class Database {
       },
       link: {
         type: Sequelize.STRING(256),
+        allowNull: false
+      },
+      user_id: {
+        type: Sequelize.INTEGER(6).UNSIGNED,
         allowNull: false
       },
       product_type_id: {
@@ -89,7 +95,8 @@ class Database {
       id: {
         type: Sequelize.INTEGER(6).UNSIGNED,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
       },
       title: {
         type: Sequelize.STRING(256),
