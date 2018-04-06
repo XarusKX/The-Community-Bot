@@ -9,10 +9,15 @@ exports.run = (client, msg, args) => {
     where: { title: title},
     attributes: ["link"]
   }).then(item => {
+    if (!item) {
+      console.log("Searched webtoon undetected, please update database.");
+      msg.channel.send("The webtoon is undetected :( If you think this is a mistake, please contact the admin.");
+      return;
+    }
     let data = ws.showWebtoon(client, msg, item.link);
   }).catch(err => {
     console.error();
-  }).bind("msg", msg);
+  });
 }
 
 exports.conf = {

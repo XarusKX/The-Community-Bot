@@ -1,6 +1,6 @@
 {
   "name": "webtoon-hub-bot",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A test bot for Discord's server, Webtoon Hub!",
   "main": "main.js",
   "scripts": {
