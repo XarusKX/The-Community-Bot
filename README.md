@@ -1,4 +1,4 @@
-# Webtcomics Hub Bot (1.1.0)
+# Webcomics Hub Bot (1.1.0)
 A discord bot made using the server **Webcomics Hub!** as model for features and requirements.
 
 ## Features
@@ -39,6 +39,10 @@ A discord bot made using the server **Webcomics Hub!** as model for features and
   updatewebtoon
   ```
 ### Misc
+* command
+  ```
+  command <command name>
+  ```
 * ping
   ```
   ping
