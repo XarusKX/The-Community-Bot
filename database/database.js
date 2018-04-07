@@ -91,7 +91,7 @@ class Database {
       },
     })
 
-    this.Webtoon = this.Db.define("webtoons", {
+    this.Webtoons = this.Db.define("webtoons", {
       id: {
         type: Sequelize.INTEGER(6).UNSIGNED,
         allowNull: false,
@@ -120,8 +120,8 @@ class Database {
         allowNull: true
       },
       likes: {
-        type: Sequelize.INTEGER(11).UNSIGNED,
-        allowNull: false
+        type: Sequelize.STRING(16),
+        allowNull: true
       },
     })
 

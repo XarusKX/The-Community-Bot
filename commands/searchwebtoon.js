@@ -5,7 +5,7 @@ exports.run = (client, msg, args) => {
   let url = "";
   let title = args.join(" ");
 
-  client.db1.Webtoon.findOne({
+  client.db1.Webtoons.findOne({
     where: { title: title},
     attributes: ["link"]
   }).then(item => {

@@ -26,7 +26,7 @@ module.exports.updateWebtoon = function (client) {
     });
     webtoon = objfunc.removeDuplicates(webtoon, "title");
     webtoon.sort(objfunc.compareFuncByTitle);
-    client.db1.Webtoon.bulkCreate(webtoon, { updateOnDuplicate: true })
+    client.db1.Webtoons.bulkCreate(webtoon, { updateOnDuplicate: true })
       .then(() => {
         console.log(`${client.config.cliColor("GREEN")} Success added! ${client.config.cliColor("NC")}`);
       })
@@ -70,15 +70,23 @@ module.exports.showWebtoon = function (client, msg, url) {
       comic.rating = data.text();
     });
 
-    let embed = new Discord.RichEmbed()
-      .setTitle(comic.title)
-      .setAuthor("Webtoon Manager")
-      .setColor(0x3fd953)
-      .setDescription(comic.description)
-      .setImage(comic.image)
-      .setURL(comic.link);
+    client.db1.Webtoons.findOne({ where: { title: comic.title } })
+      .then(webtoon => {
+        let embed = new Discord.RichEmbed()
+          .setTitle(comic.title)
+          .setAuthor("Webtoon Manager")
+          .setColor(0x3fd953)
+          .setDescription(comic.description)
+          .setImage(comic.image)
+          .setURL(comic.link)
+          .addField("Rating", `:star: ${comic.rating}`, true)
+          .addField("Likes", `:heart: ${webtoon.likes}`, true);
 
-    msg.channel.send(embed);
+        msg.channel.send(embed);
+      }).catch(() => {
+        console.error();
+      })
+
   });
 
 }
