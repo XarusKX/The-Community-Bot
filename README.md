@@ -1,5 +1,5 @@
-# Webtoon Hub Bot (1.1.0)
-A discord bot made using the server **Webtoon Hub!** as model for features and requirements.
+# Webtcomics Hub Bot (1.1.0)
+A discord bot made using the server **Webcomics Hub!** as model for features and requirements.
 
 ## Features
 * Bot commands (prefix: **wh!**).
