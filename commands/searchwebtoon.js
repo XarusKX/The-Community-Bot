@@ -1,6 +1,7 @@
 const ws = require("../modules/webtoon_scraping.js");
 
 exports.run = (client, msg, args) => {
+  msg.delete();
 
   let url = "";
   let title = args.join(" ");
@@ -11,8 +12,10 @@ exports.run = (client, msg, args) => {
   }).then(item => {
     if (!item) {
       console.log("Searched webtoon undetected, please update database.");
-      msg.channel.send("The webtoon is undetected :( If you think this is a mistake, please contact the admin.");
-      return;
+      msg.channel.send("The webtoon is undetected :( If you think this is a mistake, please contact the admin.")
+        .then(m => {
+          m.delete(2000);
+        });
     }
     let data = ws.showWebtoon(client, msg, item.link);
   }).catch(err => {
@@ -30,5 +33,5 @@ exports.conf = {
 exports.help = {
   name: "searchwebtoon",
   description: "Search for specific webtoon in the database.",
-  usage: "Search Webtoon"
+  usage: "searchwebtoon <title>"
 }

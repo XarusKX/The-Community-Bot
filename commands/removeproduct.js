@@ -51,5 +51,5 @@ exports.conf = {
 exports.help = {
   name: "removeproduct",
   description: "Remove product from database based on user and existing product.",
-  usage: "Remove product"
+  usage: "removeproduct <product_type> <title>"
 };

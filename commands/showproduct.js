@@ -60,5 +60,5 @@ exports.conf = {
 exports.help = {
   name: "showproduct",
   description: "Show product from database based on user, title, and type.",
-  usage: "Show product"
+  usage: "showproduct <mention_user> <product_type> <page, default = 1>"
 };

@@ -73,8 +73,8 @@ module.exports.showWebtoon = function (client, msg, url) {
     client.db1.Webtoons.findOne({ where: { title: comic.title } })
       .then(webtoon => {
         let embed = new Discord.RichEmbed()
-          .setTitle(comic.title)
-          .setAuthor("Webtoon Manager")
+          .setTitle(`${comic.title} (${webtoon.genre})`)
+          .setAuthor("Webcomics Manager")
           .setColor(0x3fd953)
           .setDescription(comic.description)
           .setImage(comic.image)

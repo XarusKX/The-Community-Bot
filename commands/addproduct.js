@@ -53,5 +53,5 @@ exports.conf = {
 exports.help = {
   name: "addproduct",
   description: "Add product to database based on user.",
-  usage: "Add product"
+  usage: "addproduct <product_type> <link> <title>"
 };

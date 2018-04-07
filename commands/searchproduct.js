@@ -50,5 +50,5 @@ exports.conf = {
 exports.help = {
   name: "searchproduct",
   description: "Search product from database based on title and type.",
-  usage: "Searc product"
+  usage: "searchproduct <product_type> <title>"
 };

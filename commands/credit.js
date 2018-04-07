@@ -23,5 +23,5 @@ exports.conf = {
 exports.help = {
   name: "credit",
   description: "Show bot details.",
-  usage: "Credit"
+  usage: "credit"
 };

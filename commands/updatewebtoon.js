@@ -16,5 +16,5 @@ exports.conf = {
 exports.help = {
   name: "updatewebtoon",
   description: "Update webtoon list in database.",
-  usage: "Update Webtoon"
+  usage: "updatewebtoon"
 }
