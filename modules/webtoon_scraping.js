@@ -32,7 +32,7 @@ module.exports.updateWebtoon = function (client) {
       })
       .catch(() => {
         console.error(`${client.config.cliColor("RED")} Something's wrong, the update fail :( ${client.config.cliColor("NC")}`);
-      })
+      });
   });
 }
 
@@ -85,8 +85,55 @@ module.exports.showWebtoon = function (client, msg, url) {
         msg.channel.send(embed);
       }).catch(() => {
         console.error();
-      })
-
+      });
   });
+}
 
+
+module.exports.scheduleWebtoon = function (client, msg, arg) {
+  request("https://www.webtoons.com/en/dailySchedule", function (err, res, body) {
+    if (err && res.statusCode !== 200) throw err;
+    let $ = cheerio.load(body);
+    const days = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
+
+    let j = 0;
+    let webtoon = [];
+    let string = "";
+    if (arg == "today") arg = days[(new Date()).getDay()];
+    else arg = arg.toUpperCase();
+
+    let embed = new Discord.RichEmbed()
+      .setAuthor("Webcomics Manager", "https://cdn.discordapp.com/avatars/430226324670382091/0a004e0124e514b67f15026b89dce14b.png", "https://github.com/AnthonyRicardoKX/Webtoon-Hub-Bot")
+      .setColor(235456)
+      .setFooter("Send at: " + new Date());
+
+    $(`div.daily_section._list_${arg}`).each( function(i, obj) {
+      let data = $(this).find("a.daily_card_item");
+      $(data).each( function(i, obj) {
+        let link = $(this).attr("href");
+        let childPrime = $(this).children();
+        let title = childPrime.find("p.subj").text();
+
+        webtoon[j++] = { title: title, link: link };
+      });
+    });
+
+    webtoon.sort(objfunc.compareFuncByTitle);
+
+    string = `[${webtoon[0].title}](${webtoon[0].link})\n`
+
+    let i = 1;
+    for(; i < webtoon.length; i++)
+    {
+      if (webtoon[i].title[0] != webtoon[i-1].title[0]) {
+        embed.addField(`${webtoon[i-1].title[0]}`, string, true);
+        string = `[${webtoon[i].title}](${webtoon[i].link})\n`;
+      } else {
+        string = string + `[${webtoon[i].title}](${webtoon[i].link})\n`;
+      }
+    }
+
+    if (string != "") embed.addField(`${webtoon[i-1].title[0]}`, string, true);
+    msg.channel.send(embed);
+  });
 }

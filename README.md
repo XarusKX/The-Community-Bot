@@ -30,8 +30,14 @@ A discord bot made using the server **Webcomics Hub!** as model for features and
   showproduct <mention user> <product_type> <page, default = 1>
   ```
 ### Webtoon
+* schedulewebtoon
+  ```
+  Shows what webtoon updates at specific day alphabetically sorted.
+  schedulewebtoon <name of the day / today>
+  ```
 * searchwebtoon
   ```
+  Search for a webtoon if exist in database.
   searchwebtoon <title>
   ```
 * updatewebtoon
