@@ -29,6 +29,22 @@ A discord bot made using the server **Webcomics Hub!** as model for features and
   Shows ten titles per page.
   showproduct <mention user> <product_type> <page, default = 1>
   ```
+### Role
+* addrole
+  ```
+  Give role to user.
+  addrole <role name>
+  ```
+* listrole
+  ```
+  List all the server's roles (10 roles per page).
+  listrole <page, default = 1>
+  ```
+* removerole
+  ```
+  Remove role from user.
+  removerole <role name>
+  ```
 ### Webtoon
 * schedulewebtoon
   ```

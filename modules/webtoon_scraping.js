@@ -99,10 +99,13 @@ module.exports.scheduleWebtoon = function (client, msg, arg) {
     let j = 0;
     let webtoon = [];
     let string = "";
-    if (arg == "today") arg = days[(new Date()).getDay()];
+
+    if(arg == undefined) arg = "today";
+    if(arg == "today") arg = days[(new Date()).getDay()];
     else arg = arg.toUpperCase();
 
     let embed = new Discord.RichEmbed()
+      .setTitle(`${arg} Webtoon Schedule`)
       .setAuthor("Webcomics Manager", "https://cdn.discordapp.com/avatars/430226324670382091/0a004e0124e514b67f15026b89dce14b.png", "https://github.com/AnthonyRicardoKX/Webtoon-Hub-Bot")
       .setColor(235456)
       .setFooter("Send at: " + new Date());
