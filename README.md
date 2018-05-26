@@ -1,4 +1,4 @@
-# Webcomics Hub Bot (1.1.0)
+# Webcomics Hub Bot (1.2.0)
 A discord bot made using the server **Webcomics Hub!** as model for features and requirements.
 
 ## Features

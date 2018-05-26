@@ -82,7 +82,7 @@ class Database {
                 allowNull: false
             },
             link: {
-                type: Sequelize.STRING(256),
+                type: Sequelize.STRING(255),
                 allowNull: false
             },
             user_id: {
@@ -103,12 +103,12 @@ class Database {
                 autoIncrement: true
             },
             title: {
-                type: Sequelize.STRING(256),
+                type: Sequelize.STRING(255),
                 allowNull: false,
                 unique: true
             },
             author: {
-                type: Sequelize.STRING(256),
+                type: Sequelize.STRING(255),
                 allowNull: false
             },
             genre: {
@@ -116,11 +116,11 @@ class Database {
                 allowNull: true
             },
             image: {
-                type: Sequelize.STRING(256),
+                type: Sequelize.STRING(255),
                 allowNull: true
             },
             link: {
-                type: Sequelize.STRING(256),
+                type: Sequelize.STRING(255),
                 allowNull: true
             },
             likes: {
