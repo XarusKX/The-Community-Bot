@@ -33,6 +33,7 @@ A discord bot made using the server **Webcomics Hub!** as model for features and
 * addrole
   ```
   Give role to user.
+  Following Discord role hierarchy rules, bot can give any role that is hierarchically lower than its own.
   addrole <role name>
   ```
 * listrole

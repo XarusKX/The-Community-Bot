@@ -20,7 +20,6 @@ exports.run = (client, msg, args) => {
                     targetRole = guildRole.id;
                 }
             });
-
             if (targetRole != "") {
                 if (memberRoles.length == 0) {
                     guildMember.addRole(targetRole);
@@ -38,16 +37,22 @@ exports.run = (client, msg, args) => {
                                 });
                         } else {
                             found = true;
-                            guildMember.addRole(targetRole);
-                            msg.channel.send("Role added!")
-                                .then(m => {
-                                    m.delete(2000);
+                            guildMember.addRole(targetRole)
+                                .then(() => {
+                                    msg.channel.send("Role added!")
+                                        .then(m => {
+                                            m.delete(2000);
+                                        });
+                                })
+                                .catch(error => {
+                                    console.error;
+                                    msg.channel.send(`Fail to add role. Reason: ${error.message}`);
                                 });
+
                         }
                     });
                 }
             }
-
 
             if (!found) {
                 msg.channel.send("Role not found!")

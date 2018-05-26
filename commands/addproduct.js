@@ -51,7 +51,7 @@ exports.run = (client, msg, args) => {
                         .catch(() => {
                             console.error();
                             msg.channel.send(":shrug: Something's wrong! Fail to add product :(");
-                        });
+                        }));
                     }).bind("msg", msg);
             };
 
