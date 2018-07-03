@@ -1,5 +1,6 @@
-# Webcomics Hub Bot (1.2.0)
+# Webcomics Hub Bot (1.3.1)
 A discord bot made using the server **Webcomics Hub!** as model for features and requirements.
+Give a star if you like :)
 
 ## Features
 * Bot commands (prefix: **wh!**).
@@ -10,63 +11,75 @@ A discord bot made using the server **Webcomics Hub!** as model for features and
 ## Category
 ### Product
 * addproduct
-  ```
-  Add a single product under the message author name
-  addproduct <product_type> <link> <title>
-  ```
+    ```
+    Add a single product under the message author name
+    addproduct <product_type> <link> <title>
+
+    product_type: art, comic, poet, story
+
+    Note: For arts, adding the command '--save' allows uploading the image into the bot server.
+    ```
 * removeproduct
-  ```
-  Remove a single product under the message author name
-  removeproduct <product_type> <title>
-  ```
+    ```
+    Remove a single product under the message author name
+    removeproduct <product_type> <title>
+    ```
+* listproduct
+    ```
+    Show list products of certain type belonging to a user.
+    listproduct <mention user> <product_type> <page, default = 1>
+    ```
 * searchproduct
-  ```
-  Shows any products recorded in the database
-  searchproduct <product_type> <title>
-  ```
+    ```
+    Shows any products recorded in the database based on title filter.
+    searchproduct <product_type> <title>
+    ```
+
 * showproduct
-  ```
-  Shows ten titles per page.
-  showproduct <mention user> <product_type> <page, default = 1>
-  ```
+    ```
+    Show a single product based on name and type.
+    showproduct <product_type> <product_name>
+    ```
 ### Role
 * addrole
-  ```
-  Give role to user.
-  Following Discord role hierarchy rules, bot can give any role that is hierarchically lower than its own.
-  addrole <role name>
-  ```
+    ```
+    Give role to user.
+    Following Discord role hierarchy rules, bot can give any role that is hierarchically lower than its own.
+    addrole <role name>
+    ```
 * listrole
-  ```
-  List all the server's roles (10 roles per page).
-  listrole <page, default = 1>
-  ```
+    ```
+    List all the server's roles (10 roles per page).
+    listrole <page, default = 1>
+    ```
 * removerole
-  ```
-  Remove role from user.
-  removerole <role name>
-  ```
+    ```
+    Remove role from user.
+    removerole <role name>
+    ```
 ### Webtoon
 * schedulewebtoon
-  ```
-  Shows what webtoon updates at specific day alphabetically sorted.
-  schedulewebtoon <name of the day / today>
-  ```
+    ```
+    Shows what webtoon updates at specific day alphabetically sorted.
+    schedulewebtoon <name of the day / today>
+    ```
 * searchwebtoon
-  ```
-  Search for a webtoon if exist in database.
-  searchwebtoon <title>
-  ```
+    ```
+    Search for a webtoon if exist in database.
+    searchwebtoon <title>
+    ```
 * updatewebtoon
-  ```
-  updatewebtoon
-  ```
+    ```
+    updatewebtoon
+    ```
 ### Misc
-* command
-  ```
-  command <command name>
-  ```
+* help
+    ```
+    Show usage/instruction of a command.
+    help <command name>
+    ```
 * ping
-  ```
-  ping
-  ```
+    ```
+    Show latency.
+    ping
+    ```

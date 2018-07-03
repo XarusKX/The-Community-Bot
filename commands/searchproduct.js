@@ -1,4 +1,5 @@
 const arrfunc = require("../modules/array_functionality.js");
+const Discord = require('discord.js');
 
 exports.run = (client, msg, args) => {
 
@@ -24,28 +25,25 @@ exports.run = (client, msg, args) => {
             break;
     }
 
-    client.db1.Users.findOne({
-            where: {
-                discord_id: msg.author.id
-            }
-        })
-        .then(user => {
-            productsObj.user_id = user.id;
+    client.db1.Products.findAll({
+        where: {
+            title: { $like: `%${productsObj.title}%`},
+            product_type_id: productsObj.product_type_id
+        }
+    }).then(product => {
+        console.log(`Searching product(s) ${productsObj.title}. . .`);
+        
+        let embed = new Discord.RichEmbed();
+        for (let i = 0; i < 10; i++) {
+            if (i >= product.length) break;
+            embed.addField(product[i].title, product[i].link);
+        }
+        msg.channel.send(embed);
 
-            client.db1.Products.findOne({
-                where: {
-                    title: productsObj.title,
-                    user_id: productsObj.user_id,
-                    product_type_id: productsObj.product_type_id
-                }
-            }).then(product => {
-                console.log(`Searching product ${product.title}. . .`);
-                msg.channel.send(`\`\`\`${product.title} - ${product.link}\`\`\``);
-            }).catch(() => {
-                console.error();
-                msg.channel.send(":shrug: Something's wrong! Fail to delete product :(");
-            });
-        });
+    }).catch(error => {
+        console.log(error);
+        msg.channel.send(":shrug: Something's wrong! Fail to search product. Product may not exist or filter is incorrect.");
+    });
 };
 
 exports.conf = {
