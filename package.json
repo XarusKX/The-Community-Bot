@@ -28,8 +28,10 @@
     "discord.js": "^11.3.2",
     "enmap": "^2.0.4",
     "enmap-level": "^2.0.2",
+    "http": "0.0.0",
     "mysql2": "^1.5.3",
     "request": "^2.85.0",
-    "sequelize": "^4.37.5"
+    "sequelize": "^4.37.5",
+    "yandex.translate": "^1.0.1"
   }
 }
