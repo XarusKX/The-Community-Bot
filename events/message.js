@@ -28,7 +28,7 @@ module.exports = async (client, message) => {
         translator.detect(message.content)
             .then(res => {
                 console.log(res);
-                if (res != 'en') {
+                if (res != 'en' && res != '') {
                     message.delete();
                     message.channel.send(':no_entry: This channel/server allows only english language.')
                         .then(m => {
