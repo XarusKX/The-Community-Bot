@@ -43,7 +43,7 @@ exports.conf = {
 };
 
 exports.help = {
-    name: "command",
+    name: "help",
     description: "Show parameters and usage of a command.",
-    usage: "command <command name>"
+    usage: "help <command name>"
 };

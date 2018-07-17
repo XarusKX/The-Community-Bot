@@ -16,6 +16,13 @@
     -->
     <pma:structure_schemas>
         <pma:database name="webtoon_hub" collation="latin1_swedish_ci" charset="latin1">
+            <pma:table name="product_type">
+                CREATE TABLE `product_type` (
+                  `id` int(3) unsigned NOT NULL AUTO_INCREMENT,
+                  `name` varchar(128) NOT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+            </pma:table>
             <pma:table name="products">
                 CREATE TABLE `products` (
                   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
@@ -28,13 +35,6 @@
                   KEY `product_type_id` (`product_type_id`),
                   CONSTRAINT `products_ibfk_1` FOREIGN KEY (`product_type_id`) REFERENCES `product_type` (`id`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-            </pma:table>
-            <pma:table name="product_type">
-                CREATE TABLE `product_type` (
-                  `id` int(3) unsigned NOT NULL AUTO_INCREMENT,
-                  `name` varchar(128) NOT NULL,
-                  PRIMARY KEY (`id`)
-                ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="roles">
                 CREATE TABLE `roles` (
