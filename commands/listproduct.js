@@ -33,7 +33,7 @@ exports.run = (client, msg, args) => {
             break;
     }
 
-    client.db1.Users.findOne({
+    client.db1.User.findOne({
             where: {
                 discord_id: discordId
             }

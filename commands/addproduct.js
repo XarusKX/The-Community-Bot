@@ -38,7 +38,7 @@ exports.run = (client, msg, args) => {
             break;
     }
 
-    client.db1.Users.findOrCreate({
+    client.db1.User.findOrCreate({
         where: {
             discord_id: msg.author.id
         }
@@ -46,7 +46,7 @@ exports.run = (client, msg, args) => {
     .spread((user, created) => {
         productsObj.user_id = user.id;
 
-        client.db1.Products.findOrCreate({
+        client.db1.Product.findOrCreate({
             where: {
                 title: productsObj.title,
                 link: productsObj.link

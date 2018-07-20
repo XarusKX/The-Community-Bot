@@ -29,7 +29,7 @@ exports.run = (client, msg, args) => {
             break;
     }
 
-    client.db1.Products.findOne({
+    client.db1.Product.findOne({
         where: {
             title: productsObj.title,
             product_type_id: productsObj.product_type_id

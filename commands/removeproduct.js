@@ -24,7 +24,7 @@ exports.run = (client, msg, args) => {
             break;
     }
 
-    client.db1.Users.findOne({
+    client.db1.User.findOne({
             where: {
                 discord_id: msg.author.id
             }
@@ -32,7 +32,7 @@ exports.run = (client, msg, args) => {
         .then(user => {
             productsObj.user_id = user.id;
 
-            client.db1.Products.findOne({
+            client.db1.Product.findOne({
                 where: {
                     title: productsObj.title,
                     user_id: productsObj.user_id,

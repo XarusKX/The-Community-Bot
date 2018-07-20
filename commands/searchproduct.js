@@ -25,14 +25,14 @@ exports.run = (client, msg, args) => {
             break;
     }
 
-    client.db1.Products.findAll({
+    client.db1.Product.findAll({
         where: {
             title: { $like: `%${productsObj.title}%`},
             product_type_id: productsObj.product_type_id
         }
     }).then(product => {
         console.log(`Searching product(s) ${productsObj.title}. . .`);
-        
+
         let embed = new Discord.RichEmbed();
         for (let i = 0; i < 10; i++) {
             if (i >= product.length) break;
