@@ -1,5 +1,24 @@
-const Sequelize = require("sequelize");
-const Config = require("../config.js");
+const Sequelize = require('sequelize');
+const Config = require('../config/main-config');
+
+const User = require('../models/User');
+const UserRole = require('../models/UserRole');
+const Role = require('../models/Role');
+const ProductType = require('../models/ProductType');
+const Product = require('../models/Product');
+const Webtoon = require('../models/Webtoon');
+
+const Anime = require('../models/Anime');
+const AnimeGenre = require('../models/AnimeGenre');
+const AnimeLicensor = require('../models/AnimeLicensor');
+const AnimeProducer = require('../models/AnimeProducer');
+const AnimeStudio = require('../models/AnimeStudio');
+const AnimeTheme = require('../models/AnimeTheme');
+const Genre = require('../models/Genre');
+const Licensor = require('../models/Licensor');
+const MalGenre = require('../models/MalGenre');
+const Producer = require('../models/Producer');
+const Studio = require('../models/Studio');
 
 class Database {
     constructor() {
@@ -7,128 +26,29 @@ class Database {
             host: Config.db[0].host,
             dialect: "mysql",
             operatorAliases: false,
-        });
-
-        this.Users = this.Db.define("users", {
-            id: {
-                type: Sequelize.INTEGER(6).UNSIGNED,
-                allowNull: false,
-                primaryKey: true,
-                autoIncrement: true
-            },
-            discord_id: {
-                type: Sequelize.STRING(24),
-                allowNull: false,
-            },
-        }, {
-            timestamps: false
-        });
-
-        this.UserRoles = this.Db.define("user_roles", {
-            id: {
-                type: Sequelize.INTEGER(8).UNSIGNED,
-                allowNull: false,
-                primaryKey: true,
-            },
-            user_id: {
-                type: Sequelize.INTEGER(6).UNSIGNED,
-                allowNull: false
-            },
-            role_id: {
-                type: Sequelize.INTEGER(3).UNSIGNED,
-                allowNull: false
+            define: {
+                freezeTableName: true
             }
-        }, {
-            timestamps: false
         });
 
-        this.Roles = this.Db.define("roles", {
-            id: {
-                type: Sequelize.INTEGER(3).UNSIGNED,
-                allowNull: false,
-                primaryKey: true
-            },
-            name: {
-                type: Sequelize.STRING(128),
-                allowNull: false
-            }
-        }, {
-            timestamps: false
-        });
+        this.User = User(this.Db, Sequelize);
+        this.UserRole = UserRole(this.Db, Sequelize);
+        this.Role = Role(this.Db, Sequelize);
+        this.ProductType = ProductType(this.Db, Sequelize);
+        this.Product = Product(this.Db, Sequelize);
+        this.Webtoon = Webtoon(this.Db, Sequelize);
 
-        this.ProductType = this.Db.define("product_type", {
-            id: {
-                type: Sequelize.INTEGER(3).UNSIGNED,
-                allowNull: false,
-                primaryKey: true
-            },
-            name: {
-                type: Sequelize.STRING(128),
-                allowNull: false
-            }
-        }, {
-            timestamps: false
-        });
-
-        this.Products = this.Db.define("products", {
-            id: {
-                type: Sequelize.INTEGER(12).UNSIGNED,
-                allowNull: false,
-                primaryKey: true,
-                autoIncrement: true
-            },
-            title: {
-                type: Sequelize.STRING(128),
-                allowNull: false
-            },
-            link: {
-                type: Sequelize.STRING(255),
-                allowNull: false
-            },
-            user_id: {
-                type: Sequelize.INTEGER(6).UNSIGNED,
-                allowNull: false
-            },
-            product_type_id: {
-                type: Sequelize.INTEGER(3).UNSIGNED,
-                allowNull: false
-            },
-        })
-
-        this.Webtoons = this.Db.define("webtoons", {
-            id: {
-                type: Sequelize.INTEGER(6).UNSIGNED,
-                allowNull: false,
-                primaryKey: true,
-                autoIncrement: true
-            },
-            title: {
-                type: Sequelize.STRING(255),
-                allowNull: false,
-                unique: true
-            },
-            author: {
-                type: Sequelize.STRING(255),
-                allowNull: false
-            },
-            genre: {
-                type: Sequelize.STRING(48),
-                allowNull: true
-            },
-            image: {
-                type: Sequelize.STRING(255),
-                allowNull: true
-            },
-            link: {
-                type: Sequelize.STRING(255),
-                allowNull: true
-            },
-            likes: {
-                type: Sequelize.STRING(16),
-                allowNull: true
-            },
-        })
-
+        this.Anime = Anime(this.Db, Sequelize);
+        this.AnimeGenre = AnimeGenre(this.Db, Sequelize);
+        this.AnimeLicensor = AnimeLicensor(this.Db, Sequelize);
+        this.AnimeProducer = AnimeProducer(this.Db, Sequelize);
+        this.AnimeStudio = AnimeStudio(this.Db, Sequelize);
+        this.AnimeTheme = AnimeTheme(this.Db, Sequelize);
+        this.Genre = Genre(this.Db, Sequelize);
+        this.Licensor = Licensor(this.Db, Sequelize);
+        this.MalGenre = MalGenre(this.Db, Sequelize);
+        this.Producer = Producer(this.Db, Sequelize);
+        this.Studio = Studio(this.Db, Sequelize);
     }
 }
 
