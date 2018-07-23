@@ -8,12 +8,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      // user: {
-      //   type: Sequelize.INTEGER
-      // },
-      // role: {
-      //   type: Sequelize.INTEGER
-      // },
+      user: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'user', key: 'id' }
+      },
+      role: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'role', key: 'id' }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

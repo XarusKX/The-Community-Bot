@@ -5,7 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     mal_genre: DataTypes.INTEGER
   }, {});
   AnimeGenre.associate = function(models) {
-    // associations can be defined here
+      AnimeGenre.hasOne(Anime, {
+          foreignKey: 'anime'
+      });
   };
   return AnimeGenre;
 };

@@ -9,7 +9,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       anime: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'anime', key: 'id' }
       },
       mal_genre: {
         type: Sequelize.INTEGER
