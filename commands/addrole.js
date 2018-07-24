@@ -1,68 +1,53 @@
 const arrfunc = require("../modules/array_functionality.js");
 
-exports.run = (client, msg, args) => {
-    msg.delete();
+exports.run = async (client, msg, args) => {
 
     let roleName = args.joinByIndex(' ', 0);
     let author = msg.author;
-    msg.guild.fetchMember(author)
-        .then(guildMember => {
-            /* Guild Roles are in object */
-            let guildRoles = guildMember.guild.roles;
-            /* Member Roles are in id */
-            let memberRoles = guildMember._roles;
-            let targetRole = "";
-            let found = false;
+    let guildMember = await msg.guild.fetchMember(author);
 
-            guildRoles.forEach(function(guildRole) {
-                if (guildRole.name == roleName) {
+    let guildRoles = guildMember.guild.roles;
+    let memberRoles = guildMember._roles;
+    let targetRole = "";
+    let found = false;
+    let exist = false;
+
+    guildRoles.forEach( function(guildRole) {
+        if (guildRole.name == roleName) {
+            exist = true;
+            targetRole = guildRole.id;
+        }
+    });
+
+    if (exist) {
+        if (memberRoles.length == 0) {
+            console.log(`Adding role id ${targetRole} to user ${author.id}`);
+            let addRole = await guildMember.addRole(targetRole);
+            let responseMessage = await msg.channel.send('Role added!');
+            responseMessage.delete(2000);
+        } else {
+            memberRoles.forEach(async function(memberRole) {
+                if (memberRole == targetRole) {
                     found = true;
-                    targetRole = guildRole.id;
+                    let responseMessage = await msg.channel.send("You already have this role!");
+                    responseMessage.delete(2000);
                 }
             });
-            if (targetRole != "") {
-                if (memberRoles.length == 0) {
-                    guildMember.addRole(targetRole);
-                    msg.channel.send("Role added!")
-                        .then(m => {
-                            m.delete(2000);
-                        });
-                } else {
-                    memberRoles.forEach(function(memberRole) {
-                        if (memberRole == targetRole.id) {
-                            found = true;
-                            msg.channel.send("You already have this role!")
-                                .then(m => {
-                                    m.delete(2000);
-                                });
-                        } else {
-                            found = true;
-                            guildMember.addRole(targetRole)
-                                .then(() => {
-                                    msg.channel.send("Role added!")
-                                        .then(m => {
-                                            m.delete(2000);
-                                        });
-                                })
-                                .catch(error => {
-                                    console.error;
-                                    msg.channel.send(`Fail to add role. Reason: ${error.message}`);
-                                });
+        }
 
-                        }
-                    });
-                }
+        if (!found) {
+            try {
+                console.log(`Adding role id ${targetRole} to user ${author.id}`);
+                let newRole = await guildMember.addRole(targetRole);
+                let responseMessage = await msg.channel.send('Role added!');
+            } catch (error) {
+                let responseMessage = await msg.channel.send(`Error! Fail to add role.`);
+                console.log(error);
             }
-
-            if (!found) {
-                msg.channel.send("Role not found!")
-                    .then(m => {
-                        m.delete(2000);
-                    });
-            }
-        })
-        .catch(console.error);
-
+        }
+    } else {
+        let responseMessage = await msg.channel.send('Error! Role not found.');
+    }
 };
 
 exports.conf = {

@@ -1,16 +1,17 @@
 const arrfunc = require("../modules/array_functionality.js");
 const Discord = require("discord.js");
 
-exports.run = (client, msg, args) => {
+exports.run = async (client, msg, args) => {
 
-    if (args < 2) {
+    if (args.length < 2) {
         msg.channel.send(`Missing one or more parameters.\nUse ${client.config.prefix}help listproduct for help.`);
+        return;
     }
 
     let productsObj = {
         title: "",
-        user_id: "",
-        product_type_id: 0
+        user: "",
+        product_type: 0
     };
     let discordId = args[0].replace(/[^0-9]/gi, "");
     let showPage = "";
@@ -20,45 +21,46 @@ exports.run = (client, msg, args) => {
 
     switch (args[1].toLowerCase()) {
         case "art":
-            productsObj.product_type_id = 1;
+            productsObj.product_type = 1;
             break;
         case "comic":
-            productsObj.product_type_id = 2;
+            productsObj.product_type = 2;
             break;
         case "poet":
-            productsObj.product_type_id = 3;
+            productsObj.product_type = 3;
             break;
         case "story":
-            productsObj.product_type_id = 4;
+            productsObj.product_type = 4;
             break;
     }
 
-    client.db1.User.findOne({
-            where: {
-                discord_id: discordId
-            }
-        })
-        .then(user => {
-            productsObj.user_id = user.id;
+    let user = await client.db1.User.findOne({
+        where: {
+            discord: discordId
+        }
+    });
 
-            client.db1.Products.findAll({
-                where: {
-                    user_id: productsObj.user_id,
-                    product_type_id: productsObj.product_type_id
-                }
-            }).then(product => {
-                let embed = new Discord.RichEmbed();
-                for (let i = showPage - 1; i < showPage + 10; i++) {
-                    if (i >= product.length) break;
-                    embed.addField(product[i].title, product[i].link);
-                }
-                console.log(`Showing product ${showPage} - ${showPage + 10}. . .`);
-                msg.channel.send(embed);
-            }).catch(() => {
-                console.error();
-                msg.channel.send(":shrug: Something's wrong! Fail to show products :(");
-            });
-        });
+    let products = await client.db1.Product.findAll({
+        where: {
+            user: user.id,
+            product_type: productsObj.product_type
+        }
+    });
+
+    try {
+        let startIndex = (showPage - 1) * 10;
+        let endIndex = startIndex + 9;
+        let embed = new Discord.RichEmbed();
+        for (let i = startIndex; i < endIndex; i++) {
+            if (i >= products.length) break;
+            embed.addField(products[i].title, products[i].link);
+        }
+        let responseMessage = await msg.channel.send(embed);
+        console.log(`Showing product ${startIndex} - ${endIndex}. . .`);
+    } catch (error) {
+        let responseMessage = await msg.channel.send('Error! Fail to show products.');
+        console.log(error);
+    }
 };
 
 exports.conf = {

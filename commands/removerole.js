@@ -1,48 +1,38 @@
 const arrfunc = require("../modules/array_functionality.js");
 
-exports.run = (client, msg, args) => {
-    msg.delete();
-
+exports.run = async (client, msg, args) => {
     let roleName = args.joinByIndex(' ', 0);
     let author = msg.author;
-    msg.guild.fetchMember(author)
-        .then(guildMember => {
-            /* Guild Roles are in object */
-            let guildRoles = guildMember.guild.roles;
-            /* Member Roles are in id */
-            let memberRoles = guildMember._roles;
-            let targetRoleId = "";
-            let found = false;
+    let guildMember = await msg.guild.fetchMember(author);
 
-            guildRoles.forEach(function(guildRole) {
-                if (guildRole.name == roleName) {
-                    targetRoleId = guildRole.id;
-                }
-            });
+    /* Guild Roles are in object */
+    let guildRoles = guildMember.guild.roles;
+    /* Member Roles are in id */
+    let memberRoles = guildMember._roles;
+    let targetRoleId = "";
+    let found = false;
 
-            if (targetRoleId != "") {
-                memberRoles.forEach(function(memberRole) {
-                    if (memberRole == targetRoleId) {
-                        found = true;
-                        guildMember.removeRole(memberRole)
-                            .then(() => {
-                                msg.channel.send("Role removed!")
-                                    .then(m => {
-                                        m.delete(2000);
-                                    });
-                            })
-                    }
-                });
+    guildRoles.forEach(function(guildRole) {
+        if (guildRole.name == roleName) {
+            targetRoleId = guildRole.id;
+        }
+    });
+
+    if (targetRoleId != "") {
+        memberRoles.forEach(async function(memberRole) {
+            if (memberRole == targetRoleId) {
+                found = true;
+                let removedRole = await guildMember.removeRole(memberRole);
+                let responseMessage = await msg.channel.send("Role removed!");
+                responseMessage.delete(2000);
             }
+        });
+    }
 
-            if (!found) {
-                msg.channel.send("Role doesn't exist in this guild!")
-                    .then(m => {
-                        m.delete(2000);
-                    });
-            }
-        })
-        .catch(console.error);
+    if (!found) {
+        let responseMessage = await msg.channel.send("Role doesn't exist in this guild!");
+        responseMessage.delete(2000);
+    }
 };
 
 exports.conf = {

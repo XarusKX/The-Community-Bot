@@ -1,49 +1,52 @@
 const arrfunc = require("../modules/array_functionality.js");
 const Discord = require('discord.js');
 
-exports.run = (client, msg, args) => {
+exports.run = async (client, msg, args) => {
 
     if (args < 2) {
         msg.channel.send(`Missing one or more parameters.\nUse ${client.config.prefix}help showproduct for help.`);
+        return;
     }
 
     let productsObj = {
         title: "",
-        product_type_id: 0
+        product_type: 0
     };
 
     productsObj.title = args.joinByIndex(" ", 1, args.length-1);
 
     switch (args[0].toLowerCase()) {
         case "art":
-            productsObj.product_type_id = 1;
+            productsObj.product_type = 1;
             break;
         case "comic":
-            productsObj.product_type_id = 2;
+            productsObj.product_type = 2;
             break;
         case "poet":
-            productsObj.product_type_id = 3;
+            productsObj.product_type = 3;
             break;
         case "story":
-            productsObj.product_type_id = 4;
+            productsObj.product_type = 4;
             break;
     }
 
-    client.db1.Product.findOne({
+    let product = await client.db1.Product.findOne({
         where: {
             title: productsObj.title,
-            product_type_id: productsObj.product_type_id
+            product_type: productsObj.product_type
         }
-    }).then(product => {
+    })
+
+    try {
         let embed = new Discord.RichEmbed();
         embed.setTitle(product.title)
             .addField(product.link);
 
-        msg.channel.send(embed);
-    }).catch(error => {
+        let responseMessage = await msg.channel.send(embed);
+    } catch (error) {
+        let responseMessage = await msg.channel.send(":shrug: Something's wrong! Fail to show products :(");
         console.log(error);
-        msg.channel.send(":shrug: Something's wrong! Fail to show products :(");
-    });
+    }
 };
 
 exports.conf = {

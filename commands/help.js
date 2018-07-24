@@ -1,39 +1,30 @@
-exports.run = (client, msg, args) => {
-    msg.delete();
+exports.run = async (client, msg, args) => {
 
     if (args < 1) {
-        msg.channel.send("Not enough arguments.")
-            .then(m => {
-                m.delete(2000);
-                return;
-            })
+        let responseMessage = await msg.channel.send('Error!. Not enough arguments.');
+        responseMessage.delete(2000);
+        return;
     } else {
         cmd = client.commands.get(args[0].toLowerCase());
+
         if (!cmd) {
-
-            msg.channel.send("No such command exist.")
-                .then(m => {
-                    m.delete(2000);
-                });
-
+            let responseMessage = await msg.channel.send('Error! No such command exist.');
+            responseMessage.delete(2000);
         } else {
 
             let cmdDescription = cmd.help.description;
             let cmdUsage = cmd.help.usage;
-            msg.channel.send(`\`\`\`${cmdDescription}\nwh!${cmdUsage}\`\`\``)
-                .then(m => {
-                    console.log(`Request instruction on ${cmd} by ${msg.author.id}`);
-                })
-                .catch(m => {
-                    m.delete();
-                    msg.channel.send("Whoops! Looks like an error has occurred!");
-                    console.error();
-                    console.log("Something is wrong!");
-                });
 
+            try {
+                console.log(`Request instruction on wh!${cmd.help.name} by ${msg.author.id}`);
+                let responseMessage = await msg.channel.send(`\`\`\`${cmdDescription}\nwh!${cmdUsage}\`\`\``);
+            } catch (error) {
+                let errorMessage = await msg.channel.send('Whoops! Looks like an error has occurred!');
+                console.log(error);
+            }
         }
     }
-};
+}
 
 exports.conf = {
     enabled: true,

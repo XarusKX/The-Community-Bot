@@ -1,7 +1,6 @@
 const ws = require("../modules/webtoon_scraping.js");
 
-exports.run = (client, msg, args) => {
-    msg.delete();
+exports.run = async (client, msg, args) => {
     let day = args[0];
     ws.scheduleWebtoon(client, msg, day);
 }
