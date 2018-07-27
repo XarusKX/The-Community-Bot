@@ -17,7 +17,7 @@ exports.run = async (client, msg, args) => {
             console.log("Searched webtoon undetected, please update database.");
             responseMessage.delete(2000);
         }
-        let data = ws.showWebtoon(client, msg, item.link);
+        let data = ws.showWebtoon(client, msg, webtoon.link);
     } catch (error) {
         console.log(error);
     }

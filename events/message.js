@@ -25,17 +25,16 @@ module.exports = async (client, message) => {
 
     if (message.content.indexOf(client.config.prefix) !== 0) {
         let translator = new YandexTranslator(client.config.yandex.translationToken);
-        translator.detect(message.content)
-            .then(res => {
-                console.log(res);
-                if (res != 'en' && res != '') {
-                    message.delete();
-                    message.channel.send(':no_entry: This channel/server allows only english language.')
-                        .then(m => {
-                            m.delete(1000);
-                        });
-                }
-            });
+        let translatorDetect = await translator.detect(message.content);
+        try {
+            if (translatorDetect != 'en' && translatorDetect != '') {
+                message.delete();
+                let responseMessage = await message.channel.send(':no_entry: This channel/server allows only english language.');
+                responseMessage.delete(1000);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     } else {
         const args = message.content.split(/ +/g);
         const command = args.shift().slice(client.config.prefix.length).toLowerCase();

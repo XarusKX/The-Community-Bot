@@ -2,6 +2,9 @@
 const discordToken = "YOUR_TOKEN";
 const prefix = "YOUR_PREIFX";
 
+const yandex = {
+    translationToken: 'YOUR_YANDEX_TOKEN'
+};
 
 // CLI Styling
 const cliColor = (color) => {
@@ -42,3 +45,4 @@ module.exports.discordToken = discordToken;
 module.exports.prefix = prefix;
 module.exports.db = db;
 module.exports.cliColor = cliColor;
+module.exports.yandex = yandex;
