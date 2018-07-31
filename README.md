@@ -1,15 +1,60 @@
-# Webcomics Hub Bot (1.3.1)
-A discord bot made using the server **Webcomics Hub!** as model for features and requirements.
+# The Community Bot (1.3.1)
+===========================
+**Was Webtoon Hub Bot**
+A discord bot previously based on the server **Webcomics Hub!** as model for features and requirements. Now the features are expanding to occupy more than just webtoons community.
 Give a star if you like :)
 
-## Features
-* Bot commands (prefix: **wh!**).
-* Custom functionality for array and object.
-* MySQL database integration.
-* Web scraping.
 
-## Category
-### Product
+## Features
+===========
+### User
+* Bot commands (prefix: **c!**)
+* Featuring anime and webtoon related commands.
+* Save images of your own creation to easily summon it in Discord.
+
+### Developer
+* Provides API for anime (Jikan) and webtoon.
+* MySQL database integration using Sequelize.
+* Migration and Seeding via Sequelize CLI.
+* Custom functionality for array and object.
+
+## Commands
+===========
+### Category
+#### Anime
+* searchanime
+    ```
+    Search anime through Jikan API.
+
+    searchanime <anime_title>
+    ```
+* searchmanga
+    ```
+    Search manga through Jikan API.
+
+    searchmanga <manga_title>
+    ```
+* showanime
+    ```
+    Show anime information through Jikan API.
+
+    showanime <anime_id>
+    ```
+* showmanga
+    ```
+    Show manga information through Jikan API.
+
+    showmanga <manga_id>
+    ```
+
+#### Competitive Programming
+* showcp
+    ```
+    Show competitive programming question based on title.
+    showcp <title>
+    ```
+
+#### Product
 * addproduct
     ```
     Add a single product under the message author name
@@ -40,7 +85,7 @@ Give a star if you like :)
     Show a single product based on name and type.
     showproduct <product_type> <product_name>
     ```
-### Role
+#### Role
 * addrole
     ```
     Give role to user.
@@ -57,7 +102,7 @@ Give a star if you like :)
     Remove role from user.
     removerole <role name>
     ```
-### Webtoon
+#### Webtoon
 * schedulewebtoon
     ```
     Shows what webtoon updates at specific day alphabetically sorted.
@@ -72,7 +117,7 @@ Give a star if you like :)
     ```
     updatewebtoon
     ```
-### Misc
+#### Misc
 * help
     ```
     Show usage/instruction of a command.
