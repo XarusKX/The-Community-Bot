@@ -12,10 +12,14 @@ module.exports = {
                 type: Sequelize.STRING(36)
             },
             created_at: {
-                type: Sequelize.DATE
+                allowNull: false,
+                type: Sequelize.DATE,
+                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
             },
             updated_at: {
-                type: Sequelize.DATE
+                allowNull: false,
+                type: Sequelize.DATE,
+                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
             }
         });
     },

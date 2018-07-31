@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('product', {
+        return queryInterface.createTable('competitive_programming_problem', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
@@ -11,24 +11,30 @@ module.exports = {
             title: {
                 type: Sequelize.STRING
             },
-            link: {
+            source_url: {
                 type: Sequelize.STRING
             },
-            user: {
-                allowNull: false,
-                type: Sequelize.INTEGER,
-                references: {
-                    model: 'user',
-                    key: 'id'
-                }
+            detail: {
+                type: Sequelize.TEXT
             },
-            product_type: {
+            input_detail: {
                 allowNull: false,
-                type: Sequelize.INTEGER,
-                references: {
-                    model: 'product_type',
-                    key: 'id'
-                }
+                type: Sequelize.TEXT
+            },
+            output_detail: {
+                allowNull: false,
+                type: Sequelize.TEXT
+            },
+            input_sample: {
+                allowNull: false,
+                type: Sequelize.TEXT
+            },
+            output_sample: {
+                allowNull: false,
+                type: Sequelize.TEXT
+            },
+            note: {
+                type: Sequelize.TEXT
             },
             created_at: {
                 allowNull: false,
@@ -43,6 +49,6 @@ module.exports = {
         });
     },
     down: (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('product');
+        return queryInterface.dropTable('competitive_programming_problem');
     }
 };
