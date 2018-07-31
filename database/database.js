@@ -20,6 +20,8 @@ const MalGenre = require('../models/MalGenre');
 const Producer = require('../models/Producer');
 const Studio = require('../models/Studio');
 
+const CompetitiveProgrammingProblem = require('../models/CompetitiveProgrammingProblem');
+
 class Database {
     constructor() {
         this.Db = new Sequelize(Config.db[0].name, Config.db[0].user, Config.db[0].password, {
@@ -49,6 +51,8 @@ class Database {
         this.MalGenre = MalGenre(this.Db, Sequelize);
         this.Producer = Producer(this.Db, Sequelize);
         this.Studio = Studio(this.Db, Sequelize);
+
+        this.CompetitiveProgrammingProblem = CompetitiveProgrammingProblem(this.Db, Sequelize);
     }
 }
 

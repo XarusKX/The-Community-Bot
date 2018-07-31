@@ -14,7 +14,7 @@ exports.run = async (client, msg, args) => {
         link: "",
         user: "",
         product_type: 0,
-        createdAt: new Date()
+        created_at: new Date()
     };
     let download = function(uri, filename, callback) {
         request.head(uri, function(err, res, body) {
@@ -59,7 +59,7 @@ exports.run = async (client, msg, args) => {
         defaults: {
             user: user[0].dataValues.id,
             product_type: productsObj.product_type,
-            createdAt: productsObj.createdAt
+            created_at: productsObj.created_at
         }
     });
 
@@ -81,7 +81,7 @@ exports.run = async (client, msg, args) => {
                             link: productsObj.link,
                             user: user.id,
                             product_type: productsObj.product_type,
-                            createdAt: productsObj.createdAt
+                            created_at: productsObj.created_at
                         });
                         let responseMessage = await msg.channel.send(":heart_eyes: Yay! Successfully added product! (Picture saved)");
                     } catch (error) {
@@ -100,7 +100,7 @@ exports.run = async (client, msg, args) => {
                     link: productsObj.link,
                     user: user.id,
                     product_type: productsObj.product_type,
-                    createdAt: productsObj.createdAt
+                    created_at: productsObj.created_at
                 });
                 let responseMessage = await msg.channel.send(":heart_eyes: Yay! Successfully added product! (Picture not saved)");
             } catch (error) {
