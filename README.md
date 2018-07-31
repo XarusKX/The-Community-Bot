@@ -1,12 +1,12 @@
 # The Community Bot (1.3.1)
-===========================
+===
 **Was Webtoon Hub Bot**
 A discord bot previously based on the server **Webcomics Hub!** as model for features and requirements. Now the features are expanding to occupy more than just webtoons community.
 Give a star if you like :)
 
 
 ## Features
-===========
+===
 ### User
 * Bot commands (prefix: **c!**)
 * Featuring anime and webtoon related commands.
@@ -19,7 +19,7 @@ Give a star if you like :)
 * Custom functionality for array and object.
 
 ## Commands
-===========
+===
 ### Category
 #### Anime
 * searchanime
