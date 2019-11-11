@@ -24,14 +24,14 @@
   "author": "Anthony Ricardo Thiotanry",
   "license": "ISC",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
-    "discord.js": "^11.3.2",
-    "enmap": "^2.0.4",
+    "cheerio": "^1.0.0-rc.3",
+    "discord.js": "^11.5.1",
+    "enmap": "^2.7.2",
     "enmap-level": "^2.0.2",
     "http": "0.0.0",
-    "mysql2": "^1.5.3",
-    "request": "^2.85.0",
-    "sequelize": "^4.37.5",
+    "mysql2": "^1.7.0",
+    "request": "^2.88.0",
+    "sequelize": "^4.44.3",
     "yandex.translate": "^1.0.1"
   }
 }
